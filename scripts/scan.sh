@@ -11,7 +11,9 @@ githubUrl="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ gi
 function gcloud() {
   command gcloud components install local-extract --quiet
   command gcloud artifacts docker images scan --format='value(response.scan)' "$containerTag" > scan_id.txt
-  command gcloud artifacts docker images list-vulnerabilities "$(cat scan_id.txt)" --format="$metaDataTableFormat" > "$scanResults" && echo "Here are the scan results" && cat "$scanResults"
+  command gcloud artifacts docker images list-vulnerabilities "$(cat scan_id.txt)" --format="$metaDataTableFormat" > "$scanResults" &&\
+   echo "Here are the scan results" && \
+   cat "$scanResults"
 }
 
 function resultCount {
