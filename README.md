@@ -6,7 +6,7 @@ This repository contains scripts which can run GCP on-demand container vulnerabi
 - slack webhook with your preferred channel
 - existing Github Actions workflow with Docker build
 
-# script integration to your workflow
+# script integration with your workflow
 
 add the below code just after container build step has been completed:
 ````
