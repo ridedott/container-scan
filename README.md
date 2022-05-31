@@ -1,6 +1,6 @@
 # GCP on-demand container scan
 
-This repository contains scripts which can run GCP on-demand container vulnerability scan.
+This repository contains script which can run GCP on-demand container vulnerability scan.
 
 It solves the problem of being not able to know how secure or vulnerable your image is before pushing to Artifactory and deploying.
 
@@ -10,7 +10,8 @@ By design this script is made to be easily integrated with any Github Actions Wo
 The ease of usage is explained below:
 
 - Create slack webhook 
-Create slack webhook for your preferred notification channel in slack workspace. 
+    
+    You will need to create slack webhook for your preferred notification channel in slack workspace. To access App configuration page click here [Slack App Config].
 > Note: New webhook can be created only by Workspace admins, therefore please contact your Engineering Manager to complete this step.
  
 - Add the below code in to Github Actions workflow .yaml file, just after container build step has been completed
@@ -52,3 +53,6 @@ Create slack webhook for your preferred notification channel in slack workspace.
 ## Support
 
 If you are having issues, please let us know on Slack #report-issue-platform
+
+
+[Slack App Config]: <http://app-config>
