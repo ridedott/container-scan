@@ -1,0 +1,40 @@
+name: Continuous Delivery
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: test
+    permissions:
+      id-token: write
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout container scan repo
+        uses: actions/checkout@v3
+      - name: Checkout monitoring repo
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          repository: ridedott/monitoring
+          path: monitoring
+      - name: list files
+        run: ls -lrtah
+      - name: Authenticate Google Cloud Platform
+        uses: google-github-actions/auth@v0.4.4
+        with:
+          access_token_lifetime: 300s
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_COM_RIDEDOTT }}
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER_COM_RIDEDOTT }}
+    timeout-minutes: 5
+
+
+
+
+
+
+
+
