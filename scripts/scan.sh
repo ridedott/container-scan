@@ -4,8 +4,6 @@ touch scanResults
 scanResults="scanResults"
 vulnerabilitySeverityRating=(CRITICAL HIGH MEDIUM LOW)
 metaDataTableFormat='table(vulnerability.effectiveSeverity, vulnerability.cvssScore, noteName, vulnerability.packageIssue[0].affectedPackage, vulnerability.packageIssue[0].affectedVersion.name, vulnerability.packageIssue[0].fixedVersion.name)'
-containerTag="$1"
-slackWebhook="$2"
 githubUrl="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
 function gcloud() {
@@ -105,4 +103,3 @@ echo "Counting results and doing fail check"
 echo ""
 resultCount
 echo ""
-echo "$githubUrl"
