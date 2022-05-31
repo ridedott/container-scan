@@ -95,7 +95,7 @@ function fail() {
 }
 
 function postMessageSlack() {
-  curl --silent --output /dev/null -X POST -H 'Content-type: application/json' --data "$jsonString" $slackWebhook
+  curl --silent --output /dev/null -X POST -H 'Content-type: application/json' --data "$jsonString" "$slackWebhook"
 }
 
 echo "Running container scanning in GCP"
