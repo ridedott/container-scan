@@ -55,4 +55,4 @@ The ease of usage is explained below:
 If you are having issues, please let us know on Slack #report-issue-platform
 
 
-[Slack App Config]: <http://app-config>
+[Slack App Config]: <https://api.slack.com/apps/A03HZNNTMA4/incoming-webhooks>

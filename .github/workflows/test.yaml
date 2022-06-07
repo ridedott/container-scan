@@ -15,14 +15,6 @@ jobs:
     steps:
       - name: Checkout container scan repo
         uses: actions/checkout@v3
-      - name: Checkout monitoring repo
-        uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          repository: ridedott/monitoring
-          path: monitoring
-      - name: list files
-        run: ls -lrtah
       - name: Authenticate Google Cloud Platform
         uses: google-github-actions/auth@v0.4.4
         with:

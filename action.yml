@@ -12,6 +12,10 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@v3
-    - run: ./scan.sh
+    - name: Checkout Current Directory
+      uses: actions/checkout@v3
+      path: ./container-scan/
+    - name: Test Step
+      working-directory: ./container-scan/
+      run: ls .
       shell: bash
