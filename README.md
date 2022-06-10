@@ -79,5 +79,5 @@ resource "google_project_iam_custom_role" "ondemandscanning_analyze_packages" {
 If you are having issues, please report them in  "issue" section.
 
 [Container Analysis]: <https://cloud.google.com/container-analysis/pricing>
-[sample.yml]: <http://github.com/ridedott/container-scan/sample.yml>
+[sample.yml]: <https://github.com/ridedott/container-scan/blob/master/sample.yml>
 [Create Slack app]: <https://api.slack.com/messaging/webhooks>
