@@ -1,0 +1,39 @@
+name: "GCP Container Scan"
+author: "Victor Biga"
+description: "on-demand container scanning using GCP on-demand API"
+branding:
+  icon: "alert-triangle"
+  color: "blue"
+  
+name: "GCP on-demand container scan"
+description: "Scan container using GCP"
+
+inputs:
+  containerTag:
+    description: "Container name tag which we want to scan"
+    required: true
+  slackWebhook:
+    description: "Preferred slack channel webhook to send notifications"
+    required: true
+  githubUrl:
+    description: "Github Action github url"
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Add GITHUB run path
+      run: echo "${{ github.action_path }}" >> $GITHUB_PATH 
+      shell: bash
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0
+      with:  
+        install_components: 'local-extract'
+
+    - name: Container Scan
+      run: scan.sh
+      shell: bash
+      env:
+        containerTag: ${{ inputs.containerTag }}
+        slackWebhook: ${{ inputs.slackWebhook }}
+        githubUrl: ${{ inputs.githubUrl }}
