@@ -32,7 +32,7 @@ runs:
       uses: google-github-actions/setup-gcloud@v0
       with:  
         install_components: 'local-extract'
-        workload_identity_provider: ${{ inputs.workload_idenntity_provider }}
+        workload_identity_provider: ${{ inputs.workload_identity_provider }}
         service_account: ${{ inputs.service_account }}
     - name: Container Scan
       run: scan.sh
