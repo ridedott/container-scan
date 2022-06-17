@@ -15,12 +15,6 @@ inputs:
   githubUrl:
     description: "Github Action github url"
     required: true
-  workload_identity_provider:
-    description: "Workload Idendity Provider"
-    required: true
-  service_account:
-    description: "Service Account"
-    required: true
 runs:
   using: composite
   steps:
