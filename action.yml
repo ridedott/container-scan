@@ -15,6 +15,12 @@ inputs:
   githubUrl:
     description: "Github Action github url"
     required: true
+  workload_identity_provider:
+    description: "Workload Idendity Provider"
+    required: true
+  service_account:
+    description: "Service Account"
+    required: true
 runs:
   using: composite
   steps:
@@ -26,7 +32,8 @@ runs:
       uses: google-github-actions/setup-gcloud@v0
       with:  
         install_components: 'local-extract'
-
+        workload_identity_provider: ${{ inputs.workload_idenntity_provider }}
+        service_account: ${{ inputs.service_account }}
     - name: Container Scan
       run: scan.sh
       shell: bash
