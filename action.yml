@@ -27,16 +27,6 @@ runs:
     - name: Add GITHUB run path
       run: echo "${{ github.action_path }}" >> $GITHUB_PATH 
       shell: bash
-    - name: Authenticate Google Cloud Platform
-      uses: google-github-actions/auth@v0.8.0
-      with:
-        access_token_lifetime: 300s
-        service_account: ${{ inputs.service_account }}
-        workload_identity_provider: ${{ inputs.workload_identity_provider }}
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@v0
-      with:  
-        install_components: 'local-extract'
     - name: Container Scan
       run: scan.sh
       shell: bash
