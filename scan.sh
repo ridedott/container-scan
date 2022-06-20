@@ -6,7 +6,7 @@ githubUrl="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ gi
 
 function gcloud() {
   command gcloud artifacts docker images scan --format='value(response.scan)' "$containerTag" > scan_id.txt
-  command gcloud artifacts docker images list-vulnerabilities "$(cat scan_id.txt)" --format="$metaDataTableFormat" > scanResults &&\
+  command gcloud artifacts docker images list-vulnerabilities "$(cat scan_id.txt)" --format="$metaDataTableFormat" | tee scanResults &&\
    echo "Here are the scan results" && \
    ls -lrtah && pwd && cat scan_id.txt && \
    cat "$scanResults"
