@@ -1,0 +1,54 @@
+name: Container Scan
+
+on:
+  schedule:
+    - cron: '0 10 * * 1'
+  workflow_dispatch:
+env:
+  GOOGLE_CLOUD_PROJECT_ID: project_id_goes_here
+
+jobs:
+  docker:
+    name: Docker
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      IMAGE_NAME: container
+      GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN_SECRET_NAME_GOES_HERE }}'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Authenticate Google Cloud Platform
+        uses: google-github-actions/auth@v0.8.0
+        with:
+          access_token_lifetime: 600s
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT_NAME_GOES_HERE }}
+          workload_identity_provider:
+            ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER_NAME_GOES_HERE }}
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          install_components: 'local-extract'
+          project_id: ${{ env.GOOGLE_CLOUD_PROJECT_ID }}
+      - name: Build
+        run: |
+          docker build \
+            --build-arg GITHUB_TOKEN=$GITHUB_TOKEN \
+            --tag ${{ env.IMAGE_NAME }} \
+            .
+        env:
+          DOCKER_BUILDKIT: 1
+      - name: Container Scan
+        uses: ridedott/container-scan@master
+        with:
+          containerTag: ${{ env.IMAGE_NAME }}
+          slackWebhook: ${{ secrets.CONTAINER_SCAN_SLACK_WEBHOOK }}
+          githubUrl:
+            '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{
+            github.run_id }}'
+    timeout-minutes: 10
