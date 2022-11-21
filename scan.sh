@@ -23,7 +23,7 @@ function resultCount {
     echo "MEDIUM: $MEDIUM"
     echo "LOW: $LOW"
     jsonString=$( jq -nr \
-        --arg jqMarkdownMessageGeneral "<$githubUrl|Github Actions Failure - Container Scan>" \
+        --arg jqMarkdownMessageGeneral "<$githubUrl|Github Actions - Container Scan - $containerTag>" \
         --arg jqMarkdownMessageWhy "This container has vulnerabilities" \
         --arg jqMarkdownMessageCritical ":space_invader: CRITICAL : $CRITICAL" \
         --arg jqMarkdownMessageHigh ":lobster: HIGH : $HIGH" \
